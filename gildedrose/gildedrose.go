@@ -95,9 +95,29 @@ func agedBrieQuality(item *Item) int {
 }
 
 func updateBackstagePass(item *Item) {
+	item.Quality = backstagePassQuality(item)
+	item.SellIn -= 1
+}
 
+func backstagePassQuality(item *Item) int {
+	if item.Quality == maxQuality && item.SellIn > 0 {
+		return item.Quality
+	}
+
+	if item.SellIn > 10 {
+		return item.Quality + 1
+	}
+
+	if item.SellIn > 5 {
+		return item.Quality + 2
+	}
+
+	if item.SellIn > 0 {
+		return item.Quality + 3
+	}
+
+	return 0
 }
 
 func updateDefaultItem(item *Item) {
-
 }
